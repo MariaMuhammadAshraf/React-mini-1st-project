@@ -1,13 +1,13 @@
  //react Router 
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
  
 import "./App.css";
 import Alert from "./components/Alert";
-// import About from "./components/About";
+import About from "./components/About";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
-// import Contact from './components/Contact'; // adjust the path if needed
-// import Blogs from './components/Blogs';
+import Contact from './components/Contact'; // adjust the path if needed
+import Blogs from './components/Blogs';
 
 //import use state 
 import React, { useState } from 'react';
@@ -68,13 +68,13 @@ const toggleMode = () => {
     if (prevMode === 'light') {
       document.body.style.backgroundColor = darkColors[nextIndex];
       document.body.style.color = 'white';
-      document.title ='TextUtils - Dark Mode';
+      // document.title ='TextUtils - Dark Mode';
       showAlert(`Dark mode applied`, "success");
       return 'dark';
     } else {
       document.body.style.backgroundColor = lightColors[nextIndex];
       document.body.style.color = 'black';
-      document.title ='TextUtils - Light Mode';
+      // document.title ='TextUtils - Light Mode';
       showAlert(`Light mode applied`, "success");
       return 'light';
     }
@@ -91,12 +91,12 @@ return (
     {/* <Navbar title="TextUtils" aboutUs="About Us" contactus="Contact Us" mode={Mode} toggleMode = {toggleMode} />  */}
 
     {/* // for defaultprops use// */}
-     {/* <Router> */}
+      <Router> 
       <Navbar
         title="TextUtils"
-        // aboutUs="About Us"
-        // contactus ="Contact Us"
-        // blogs = "Blogs"
+        aboutUs="About Us"
+        contactus ="Contact Us"
+        blogs = "Blogs"
          mode={Mode}
         toggleMode={toggleMode}
       />
@@ -104,22 +104,22 @@ return (
       <Alert alert={alert} />
 
       <div className="container my-3">
-        <TextForm showAlert={showAlert} heading="Enter the text to Analyze Below" mode={Mode} />
-        {/* <Routes>
+        {/* <TextForm showAlert={showAlert} heading="Enter the text to Analyze Below" mode={Mode} /> */}
+        <Routes>
          <Route
             path="/"
-            element={<TextForm showAlert={showAlert} heading="Enter the text to Analyze Below" mode={Mode} />}
-          /> */}
-          {/* users ---> component 1
+            element={<TextForm showAlert={showAlert} heading="Try TextUtils - Word Counter,Character Counter,Remove Extra Spaces" mode={Mode} />}
+          /> 
+           {/* users ---> component 1
           users/home ---> component 2
-          exact path example */}
-           {/* <Route exact path="/about" element={<About />} />
+          exact path example  */}
+            <Route exact path="/about" element={<About  mode={Mode}  />} />
            <Route exact path="/Contact" element={<Contact />} />
-             <Route exact path="/blog" element={<Blogs />} /> */}
+             <Route exact path="/blog" element={<Blogs />} /> 
             
-        {/* </Routes> */}
+         </Routes> 
       </div>
-    {/* </Router> */}
+    </Router>
    
    </>
    

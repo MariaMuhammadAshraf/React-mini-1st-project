@@ -22,6 +22,7 @@ export default function TextForm(props) {
   const handleRemoveClick = () => {
     let newText = " ";
     setText(newText);
+     props.showAlert("Remove!", "success"); // alert message
   };
 
   // Capitalize Case
@@ -32,6 +33,7 @@ export default function TextForm(props) {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
     setText(newText);
+     props.showAlert("Convert to Capitalize!", "success"); // alert message
   };
 
   // Download Case
@@ -42,6 +44,7 @@ export default function TextForm(props) {
     element.download = "myText.txt";
     document.body.appendChild(element); // Required for Firefox
     element.click();
+     props.showAlert("Successful Downloading!", "success"); // alert message
   };
 
   // Copy link Case
@@ -60,6 +63,7 @@ export default function TextForm(props) {
       )
       .join("");
     setText(newText);
+     props.showAlert("Convert to Inverse!", "success"); // alert message
   };
 
   // Sentence Case
@@ -68,6 +72,7 @@ export default function TextForm(props) {
       .toLowerCase()
       .replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase());
     setText(newText);
+     props.showAlert("Convert to Sentence!", "success"); // alert message
   };
 
   // Title Case
@@ -78,6 +83,7 @@ export default function TextForm(props) {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
     setText(newText);
+     props.showAlert("Convert to Title!", "success"); // alert message
   };
 
   // Alternating Case
@@ -87,6 +93,7 @@ export default function TextForm(props) {
       newText += i % 2 === 0 ? text[i].toLowerCase() : text[i].toUpperCase();
     }
     setText(newText);
+     props.showAlert("Convert to Alternating!", "success"); // alert message
   };
 
   // Add dot Case
@@ -96,6 +103,7 @@ export default function TextForm(props) {
       newText += ".";
     }
     setText(newText);
+     props.showAlert("Full Stop!", "success"); // alert message
   };
 
   //outsiders work handle text copy
@@ -103,12 +111,15 @@ export default function TextForm(props) {
     var text = document.getElementById("myBox");
     text.select();
     navigator.clipboard.writeText(text.value);
+    document.getSelection().removeAllRanges();
     props.showAlert("Copy to clipboard!", "success"); // alert message
+     props.showAlert("Copy!", "success"); // alert message
   };
   //outsider work handle extra spaces remove
   const handleExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
+     props.showAlert("Remove Extra Spaces!", "success"); // alert message
   };
 
   //this is a compulsory
@@ -122,7 +133,7 @@ export default function TextForm(props) {
         className="container"
         style={{ color: props.mode === "dark" ? "white" : "#01050d" }}
       >
-        <h1>{props.heading}</h1>
+        <h1 className="mb-3">{props.heading}</h1>
 
         <div className="mb-3">
           {/* // value and onchange is compulsory // */}
@@ -140,68 +151,96 @@ export default function TextForm(props) {
         </div>
 
         <button
-          className="btn btn-primary mx-2"
+          disabled={text.trim().length === 0}
+          className="btn btn-primary mx-2 my-1"
           onClick={handleSentenceCaseClick}
         >
           Sentence Case
         </button>
         <button
-          className="btn btn-secondary mx-2"
+          disabled={text.trim().length === 0}
+          className="btn btn-secondary mx-2 my-1"
           onClick={handleTitleCaseClick}
         >
           Title Case
         </button>
-        <button className="btn btn-success mx-2" onClick={handleUpClick}>
+        <button
+          disabled={text.trim().length === 0}
+          className="btn btn-success mx-2 my-1"
+          onClick={handleUpClick}
+        >
           Convert To UpperCase
         </button>
-        <button className="btn btn-danger mx-2" onClick={handleLoClick}>
+        <button
+          disabled={text.trim().length === 0}
+          className="btn btn-danger mx-2 my-1"
+          onClick={handleLoClick}
+        >
           Convert To LowerCase
         </button>
         <button
-          className="btn btn-warning mx-2"
+          disabled={text.trim().length === 0}
+          className="btn btn-warning mx-2 my-1"
           onClick={handleCapitalizeClick}
         >
           Capitalize
         </button>
         <button
-          className="btn btn-info mx-2"
+          disabled={text.trim().length === 0}
+          className="btn btn-info mx-2 my-1"
           onClick={handleAlternatingCaseClick}
         >
           Alternating Case
         </button>
         <button
-          className="btn btn-outline-dark mx-2"
+          disabled={text.trim().length === 0}
+          className="btn btn-outline-dark mx-2 my-1"
           onClick={handleDownloadClick}
         >
           Download Text
         </button>
-        <button className="btn btn-dark mx-2" onClick={handleCopyClick}>
+        <button
+          disabled={text.trim().length === 0}
+          className="btn btn-dark mx-2 my-1"
+          onClick={handleCopyClick}
+        >
           Copy to Clipboard
         </button>
         <button
-          className="btn btn-warning mx-2 my-2"
+          disabled={text.trim().length === 0}
+          className="btn btn-warning mx-2 my-1"
           onClick={handleInverseClick}
         >
           Inverse Case
         </button>
         <button
-          className="btn btn-success mx-2 my-2"
+          disabled={text.trim().length === 0}
+          className="btn btn-success mx-2 my-1"
           onClick={handleRemoveClick}
         >
           Clear
         </button>
 
-        <button className="btn btn-primary mx-1" onClick={handleAddDot}>
+        <button
+          disabled={text.trim().length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleAddDot}
+        >
           Add Full Stop
         </button>
 
         {/* //outsider works handle text copy  */}
-        <button className="btn btn-warning mx-2 my-2" onClick={handleCopy}>
+        <button
+          disabled={text.trim().length === 0}
+          className="btn btn-warning mx-2 my-1"
+          onClick={handleCopy}
+        >
           handle Copy
         </button>
         {/* //outsider works */}
         <button
-          className="btn btn-warning mx-2 my-2"
+          disabled={text.trim().length === 0}
+          className="btn btn-warning mx-2 my-1"
           onClick={handleExtraSpaces}
         >
           Remove Extra Spaces
@@ -214,24 +253,24 @@ export default function TextForm(props) {
       >
         <h2>Your Text Summary</h2>
         <p>
+          <b>Words:</b>{" "}
           {
             text
               .trim()
               .split(/\s+/)
               .filter((word) => word.length > 0).length
           }{" "}
-          <b>Words</b> {text.length} <b>Characters</b>
+          <b>Characters:</b> {text.trim().length}
         </p>
 
         <p>
-          {0.008 * text.split(" ").length} <b>Minutes Words</b>
+          {text.trim().length === 0
+            ? 0
+            : (0.008 * text.trim().split(/\s+/).length).toFixed(2)}{" "}
+          <b>Minutes Read</b>
         </p>
         <h2>Preview</h2>
-        <p>
-          {text.length > 0
-            ? text
-            : "Enter something in the text box above to preview it here!"}
-        </p>
+        <p>{text.length > 0 ? text : "Nothing To Preview!"}</p>
       </div>
     </>
   );
